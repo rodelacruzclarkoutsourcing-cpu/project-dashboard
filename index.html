@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Tracking Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Project Tracking Dashboard</h1>
+        <p>Generated from sample data for NORTHOLT GRANGE and CLAPHAM projects. Add, edit, delete, search, or export entries below.</p>
+        <button id="export-btn">Export to CSV</button>
+    </header>
+
+    <section id="form-section">
+        <h2 id="form-title">Add New Project Entry</h2>
+        <form id="project-form">
+            <label for="project_name">Project Name:</label>
+            <input type="text" id="project_name" required><br>
+
+            <label for="assigned_to">Assigned To:</label>
+            <input type="text" id="assigned_to" required><br>
+
+            <label for="num_drawings">No. of Drawings to Produce:</label>
+            <input type="number" id="num_drawings" required><br>
+
+            <label for="marked_drawings">Marked Up Drawings Provided:</label>
+            <input type="number" id="marked_drawings" required><br>
+
+            <label for="start_date">Start Date (MM/DD/YYYY):</label>
+            <input type="text" id="start_date" placeholder="e.g., 1/14/2025" required><br>
+
+            <label for="due_date">Due Date (MM/DD/YYYY):</label>
+            <input type="text" id="due_date" placeholder="e.g., 1/14/2025" required><br>
+
+            <label for="status">Status:</label>
+            <select id="status" required>
+                <option value="Not Started">Not Started</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+                <option value="On Hold">On Hold</option>
+            </select><br>
+
+            <label for="completion_date">Completion Date (MM/DD/YYYY, optional):</label>
+            <input type="text" id="completion_date" placeholder="e.g., 1/14/2025"><br>
+
+            <label for="time_hours">Time Taken (Hours):</label>
+            <input type="number" id="time_hours" required><br>
+
+            <label for="time_days">Time Taken (Days):</label>
+            <input type="number" id="time_days" required><br>
+
+            <label for="remarks">Remarks:</label>
+            <textarea id="remarks" rows="3"></textarea><br>
+
+            <button type="submit" id="submit-btn">Add Entry</button>
+            <button type="button" id="cancel-btn" style="display:none;">Cancel Edit</button>
+        </form>
+    </section>
+
+    <section id="table-section">
+        <h2>Detailed Project Data</h2>
+        <input type="text" id="search-input" placeholder="Search by Project Name or Assigned To...">
+        <table id="project-table">
+            <thead>
+                <tr>
+                    <th>Project Name</th>
+                    <th>Assigned To</th>
+                    <th>No. of Drawings to Produce</th>
+                    <th>Marked Up Drawings Provided</th>
+                    <th>Start Date</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                    <th>Completion Date</th>
+                    <th>Time Taken (Hours)</th>
+                    <th>Time Taken (Days)</th>
+                    <th>Remarks</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                <!-- Initial rows from sample data -->
+                <tr>
+                    <td>NORTHOLT GRANGE</td>
+                    <td>Brayan, Paula</td>
+                    <td>6</td>
+                    <td>1</td>
+                    <td>1/14/2025</td>
+                    <td>1/14/2025</td>
+                    <td>Completed</td>
+                    <td>1/14/2025</td>
+                    <td>8</td>
+                    <td>1</td>
+                    <td>Updating SVP and BWH, annotations and revision date</td>
+                    <td><button class="edit-btn">Edit</button> <button class="delete-btn">Delete</button></td>
+                </tr>
+                <tr>
+                    <td>NORTHOLT GRANGE</td>
+                    <td>Brayan, Paula</td>
+                    <td>12</td>
+                    <td>12</td>
+                    <td>1/15/2025</td>
+                    <td>1/21/2025</td>
+                    <td>Completed</td>
+                    <td>1/21/2025</td>
+                    <td>40</td>
+                    <td>5</td>
+                    <td>Updating SVP and BWH, annotations and revision date</td>
+                    <td><button class="edit-btn">Edit</button> <button class="delete-btn">Delete</button></td>
+                </tr>
+                <tr>
+                    <td>NORTHOLT GRANGE</td>
+                    <td>Rodel</td>
+                    <td>12</td>
+                    <td>12</td>
+                    <td>1/20/2025</td>
+                    <td>1/21/2025</td>
+                    <td>Completed</td>
+                    <td>1/21/2025</td>
+                    <td>16</td>
+                    <td>2</td>
+                    <td>Updating SVP and BWH, annotations and revision date</td>
+                    <td><button class="edit-btn">Edit</button> <button class="delete-btn">Delete</button></td>
+                </tr>
+                <tr>
+                    <td>CLAPHAM</td>
+                    <td>Brayan, Paula</td>
+                    <td>65</td>
+                    <td>65</td>
+                    <td>1/24/2025</td>
+                    <td>1/29/2025</td>
+                    <td>Completed</td>
+                    <td>1/29/2025</td>
+                    <td>32</td>
+                    <td>4</td>
+                    <td>Clash detection of mains, svp and cable trays</td>
+                    <td><button class="edit-btn">Edit</button> <button class="delete-btn">Delete</button></td>
+                </tr>
+                <tr>
+                    <td>CLAPHAM</td>
+                    <td>Rodel</td>
+                    <td>65</td>
+                    <td>65</td>
+                    <td>1/27/2025</td>
+                    <td>1/29/2025</td>
+                    <td>Completed</td>
+                    <td>1/29/2025</td>
+                    <td>24</td>
+                    <td>3</td>
+                    <td>Clash detection of mains, svp and cable trays</td>
+                    <td><button class="edit-btn">Edit</button> <button class="delete-btn">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <p>Dashboard created for project tracking. Data saves permanently in your browser.</p>
+    </footer>
+
+    <script>
+        // JavaScript for form, edit, delete, search, export, and localStorage
+        const form = document.getElementById('project-form');
+        const tableBody = document.getElementById('table-body');
+        const submitBtn = document.getElementById('submit-btn');
+        const cancelBtn = document.getElementById('cancel-btn');
+        const formTitle = document.getElementById('form-title');
+        const exportBtn = document.getElementById('export-btn');
+        const searchInput = document.getElementById('search-input');
+
+        let editingRow = null;
+        let originalAssignee = null;
+
+        // Load data from localStorage on page load
+        function loadData() {
+            const data = JSON.parse(localStorage.getItem('projectData')) || [];
+            data.forEach(item => {
+                addRowToTable(item);
+            });
+        }
+
+        // Save data to localStorage
+        function saveData() {
+            const rows = [];
+            tableBody.querySelectorAll('tr').forEach(row => {
+                const cells = row.querySelectorAll('td');
+                rows.push({
+                    projectName: cells[0].textContent,
+                    assignedTo: cells[1].textContent,
+                    numDrawings: cells[2].textContent,
+                    markedDrawings: cells[3].textContent,
+                    startDate: cells[4].textContent,
+                    dueDate: cells[5].textContent,
+                    status: cells[6].textContent,
+                    completionDate: cells[7].textContent,
+                    timeHours: cells[8].textContent,
+                    timeDays: cells[9].textContent,
+                    remarks: cells[10].textContent
+                });
+            });
+            localStorage.setItem('projectData', JSON.stringify(rows));
+        }
+
+        // Add row to table
+        function addRowToTable(data) {
+            const newRow = tableBody.insertRow();
+            newRow.innerHTML = `
+                <td>${data.projectName}</td>
+                <td>${data.assignedTo}</td>
+                <td>${data.numDrawings}</td>
+                <td>${data.markedDrawings}</td>
+                <td>${data.startDate}</td>
+                <td>${data.dueDate}</td>
+                <td>${data.status}</td>
+                <td>${data.completionDate}</td>
+                <td>${data.timeHours}</td>
+                <td>${data.timeDays}</td>
+                <td>${data.remarks}</td>
+                <td><button class="edit-btn">Edit</button> <button class="delete-btn">Delete</button></td>
+            `;
+        }
+
+        // Load initial data
+        loadData();
+
+        // Edit and Delete button events
+        tableBody.addEventListener('click', function(e) {
+            if (e.target.classList.contains('edit-btn')) {
+                const row = e.target.closest('tr');
+                const cells = row.querySelectorAll('td');
+
+                document.getElementById('project_name').value = cells[0].textContent;
+                document.getElementById('assigned_to').value = cells[1].textContent;
+                document.getElementById('num_drawings').value = cells[2].textContent;
+                document.getElementById('marked_drawings').value = cells[3].textContent;
+                document.getElementById('start_date').value = cells[4].textContent;
+                document.getElementById('due_date').value = cells[5].textContent;
+                document.getElementById('status').value = cells[6].textContent;
+                document.getElementById('completion_date').value = cells[7].textContent === '-' ? '' : cells[7].textContent;
+                document.getElementById('time_hours').value = cells[8].textContent;
+                document.getElementById('time_days').value = cells[9].textContent;
+                document.getElementById('remarks').value = cells[10].textContent;
+
+                editingRow = row;
+                originalAssignee = cells[1].textContent;
+                formTitle.textContent = 'Edit Project Entry';
+                submitBtn.textContent = 'Update Entry';
+                cancelBtn.style.display = 'inline-block';
+            } else if (e.target.classList.contains('delete-btn')) {
+                if (confirm('Are you sure you want to delete this entry?')) {
+                    e.target.closest('tr').remove();
+                    saveData();
+                }
+            }
+        });
+
+        // Cancel edit
+        cancelBtn.addEventListener('click', function() {
+            resetForm();
+        });
+
+        // Form submit (add or update)
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const data = {
+                projectName: document.getElementById('project_name').value,
+                assignedTo: document.getElementById('assigned_to').value,
+                numDrawings: document.getElementById('num_drawings').value,
+                markedDrawings: document.getElementById('marked_drawings').value,
+                startDate: document.getElementById('start_date').value,
+                dueDate: document.getElementById('due_date').value,
+                status: document.getElementById('status').value,
+                completionDate: document.getElementById('completion_date').value || '-',
+                timeHours: document.getElementById('time_hours').value,
+                timeDays: document.getElementById('time_days').value,
+                remarks: document.getElementById('remarks').value
+            };
+
+            if (editingRow) {
+                const cells = editingRow.querySelectorAll('td');
+                cells[0].textContent = data.projectName;
+                cells[1].textContent = data.assignedTo;
+                cells[2].textContent = data.numDrawings;
+                cells[3].textContent = data.markedDrawings;
+                cells[4].textContent = data.startDate;
+                cells[5].textContent = data.dueDate;
+                cells[6].textContent = data.status;
+                cells[7].textContent = data.completionDate;
+                cells[8].textContent = data.timeHours;
+                cells[9].textContent = data.timeDays;
+                cells[10].textContent = data.remarks;
+
+                resetForm();
+                alert('Entry updated successfully!');
+            } else {
+                addRowToTable(data);
+                form.reset();
+                alert('Entry added successfully!');
+            }
+
+            saveData();
+        });
+
+        // Search/Filter
+        searchInput.addEventListener('input', function() {
+            const filter = searchInput.value.toLowerCase();
+            const rows = tableBody.querySelectorAll('tr');
+            rows.forEach(row => {
+                const projectName = row.cells[0].textContent.toLowerCase();
+                const assignedTo = row.cells[1].textContent.toLowerCase();
+                if (projectName.includes(filter) || assignedTo.includes(filter)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        // Export to CSV
+        exportBtn.addEventListener('click', function() {
+            let csv = 'Project Name,Assigned To,No. of Drawings to Produce,Marked Up Drawings Provided,Start Date,Due Date,Status,Completion Date,Time Taken (Hours),Time Taken (Days),Remarks\n';
+            const rows = tableBody.querySelectorAll('tr');
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                const rowData = [];
+                for (let i = 0; i < cells.length - 1; i++) {
+                    rowData.push('"' + cells[i].textContent.replace(/"/g, '""') + '"');
+                }
+                csv += rowData.join(',') + '\n';
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'project_tracking.csv';
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        function resetForm() {
+            form.reset();
+            editingRow = null;
+            originalAssignee = null;
+            formTitle.textContent = 'Add New Project Entry';
+            submitBtn.textContent = 'Add Entry';
+            cancelBtn.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
